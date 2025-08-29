@@ -2,6 +2,11 @@
 <html lang="en">
 
 <head>
+    <script>
+        const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+        const baseHref = isLocal ? '/' : '/my-weather/';
+        document.write(`<base href="${baseHref}">`);
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -11,9 +16,10 @@
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
         crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <title>My Weather App</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -30,8 +36,8 @@
         </div>
     </div>
 
-    <script src="helpers.js"></script>
-    <script src="nyWeather.js"></script>
+    <script src="js/helpers.js"></script>
+    <script src="js/nyWeather.js"></script>
 
 </body>
 
