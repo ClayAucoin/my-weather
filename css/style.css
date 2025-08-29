@@ -7,3 +7,7 @@
 .myWidth {
     width: 100%;
 }
+
+span {
+    font-weight: bold;
+}

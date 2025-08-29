@@ -44,16 +44,6 @@ function fetchSeattleWeather() {
 // CODE FOR INDEX.HTML
 
 // I want to have the data here put in HTML elements
-disableButton("button", true);
-
-onEvent("location", "change", function () {
-    if (getValue("location") == "none") {
-        disableButton("button", true);
-    } else {
-        disableButton("button", false);
-    };
-});
-
 var noWeather = {
     "latitude": 29.95653,
     "longitude": -90.07374,
@@ -113,6 +103,22 @@ var swWeather = {
         "apparent_temperature": 73.4
     }
 };
+
+disableButton("button", true);
+// visibleElement("dataDisplay", false);
+// visibleElement("button", false);
+
+onEvent("location", "change", function () {
+    if (getValue("location") == "none") {
+        disableButton("button", true);
+        // visibleElement("button", false);
+    } else {
+        disableButton("button", false);
+        // visibleElement("dataDisplay", true);
+        // visibleElement("button", false);
+        // visibleElement("selectCity", false);
+    };
+});
 
 onEvent("button", "click", function () {
 

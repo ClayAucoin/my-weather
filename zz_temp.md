@@ -1,13 +1,6 @@
 ```html
 
-    <script>
-        (function () {
-            const isLocal = ['localhost', '127.0.0.1', '::1'].includes(location.hostname);
-            const baseHref = isLocal ? '/' : '/${1:REPO_NAME}/';
-            const base = document.createElement('base');
-            base.setAttribute('href', baseHref);
-            document.head.prepend(base); // insert as the first element in <head>
-        })();
-    </script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
 ```
