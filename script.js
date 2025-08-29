@@ -1,3 +1,48 @@
+function fetchNewOrleansWeather() {
+    const requestOptions = {
+        method: "GET",
+        redirect: "follow"
+    };
+
+    fetch("https://api.open-meteo.com/v1/forecast?latitude=29.9547&longitude=-90.0751&current=apparent_temperature&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch", requestOptions)
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.error(error));
+}
+
+function fetchNewYorkWeather() {
+    const requestOptions = {
+        method: "GET",
+        redirect: "follow"
+    };
+
+    fetch("https://api.open-meteo.com/v1/forecast?latitude=40.7143&longitude=-74.006&current=apparent_temperature&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch", requestOptions)
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.error(error));
+}
+
+function fetchSeattleWeather() {
+    const requestOptions = {
+        method: "GET",
+        redirect: "follow"
+    };
+
+    fetch("https://api.open-meteo.com/v1/forecast?latitude=47.6062&longitude=-122.3321&current=apparent_temperature&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch", requestOptions)
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.error(error));
+}
+
+
+
+
+
+
+
+
+// CODE FOR INDEX.HTML
+
 // I want to have the data here put in HTML elements
 disableButton("button", true);
 
@@ -71,19 +116,21 @@ var swWeather = {
 
 onEvent("button", "click", function () {
 
+    fetchNewOrleansWeather();
+
     var location = getValue("location");
     var city;
     var cityState;
 
     console.log(location);
 
-    if(location == "no"){
+    if (location == "no") {
         city = noWeather;
         cityState = "New Orleans, LA";
-    } else if(location == "ny"){
+    } else if (location == "ny") {
         city = nyWeather;
         cityState = "New York, New York";
-    } else if(location == "sw"){
+    } else if (location == "sw") {
         city = swWeather;
         cityState = "Seattle, Washington";
     }
@@ -99,6 +146,9 @@ onEvent("button", "click", function () {
     setText("longitude", longitute);
     setText("temp", temp);
 });
+
+
+
 
 
 

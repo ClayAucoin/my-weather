@@ -18,25 +18,28 @@
 
 <body>
 
-    <!-- I want a card to display data -->
-    <div class="card m-2" style="width: 18rem;">
-        <div class="card-body">
-            <h5 id="cityState" class="card-title">City, ST</h5>
-            <p class="card-text">
-                Latitude: <span id="latitude"></span>°F<br>
-                Longitude: <span id="longitude"></span> km/h<br>
-                Temperature: <span id="temp"></span>
-            </p>
-            <select id="location" class="form-select" aria-label="Default select example">
-                <option selected value="none">Open this select menu</option>
-                <option value="no">New Orleans</option>
-                <option value="ny">New York, New York</option>
-                <option value="sw">Seattle, Washington</option>
-            </select>
-            <button id="button" class="btn btn-primary mt-2" type="button">Display Weather</button>
+    <div class="container myContainer d-flex justify-content-center">
+        <!-- I want a card to display data -->
+        <div class="card mx-auto p-5" style="width: 25rem;">
+            <div class="card-body">
+                <h5 id="cityState" class="card-title">City, ST</h5>
+                <p class="card-text">
+                    Latitude: <span id="latitude"></span>°F<br>
+                    Longitude: <span id="longitude"></span> km/h<br>
+                    Temperature: <span id="temp"></span>
+                </p>
+                <select id="location" class="form-select myWidth" aria-label="Default select example">
+                    <option selected value="none">Open this select menu</option>
+                    <option value="no">New Orleans</option>
+                    <option value="ny">New York, New York</option>
+                    <option value="sw">Seattle, Washington</option>
+                </select>
+                <div class="d-flex justify-content-center">
+                    <button id="button" class="btn btn-primary mt-2 myWidth" type="button">Display Weather</button>
+                </div>
+            </div>
         </div>
     </div>
-
     <script src="helpers.js"></script>
     <script src="script.js"></script>
 
