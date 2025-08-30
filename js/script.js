@@ -1,168 +1,63 @@
-// CODE FOR INDEX.HTML
-
-// I want to have the data here put in HTML elements
-var _noWeather = {
-    "latitude": 29.95653,
-    "longitude": -90.07374,
-    "generationtime_ms": 0.034809112548828125,
-    "utc_offset_seconds": 0,
-    "timezone": "GMT",
-    "timezone_abbreviation": "GMT",
-    "elevation": 10,
-    "current_units": {
-        "time": "iso8601",
-        "interval": "seconds",
-        "apparent_temperature": "°F"
-    },
-    "current": {
-        "time": "2025-08-28T00:00",
-        "interval": 900,
-        "apparent_temperature": 91.6
-    }
-};
-var _nyWeather = {
-    "latitude": 40.710335,
-    "longitude": -73.99309,
-    "generationtime_ms": 0.028133392333984375,
-    "utc_offset_seconds": 0,
-    "timezone": "GMT",
-    "timezone_abbreviation": "GMT",
-    "elevation": 51,
-    "current_units": {
-        "time": "iso8601",
-        "interval": "seconds",
-        "apparent_temperature": "°F"
-    },
-    "current": {
-        "time": "2025-08-28T00:15",
-        "interval": 900,
-        "apparent_temperature": 64.6
-    }
-};
-var _swWeather = {
-    "latitude": 47.595562,
-    "longitude": -122.32443,
-    "generationtime_ms": 0.03445148468017578,
-    "utc_offset_seconds": 0,
-    "timezone": "GMT",
-    "timezone_abbreviation": "GMT",
-    "elevation": 59,
-    "current_units": {
-        "time": "iso8601",
-        "interval": "seconds",
-        "apparent_temperature": "°F"
-    },
-    "current": {
-        "time": "2025-08-28T00:45",
-        "interval": 900,
-        "apparent_temperature": 73.4
-    }
-};
-
 
 disableButton("button", true);
-// visibleElement("dataDisplay", false);
-// visibleElement("button", false);
+visibleElement("dataDisplay", false);
+visibleElement("button", false);
 
 onEvent("location", "change", function () {
-    if (getValue("location") == "none") {
+    var location = getValue("location");
+
+    if (location == "none") {
         disableButton("button", true);
-        // visibleElement("button", false);
+        visibleElement("button", false);
     } else {
         disableButton("button", false);
-        // visibleElement("dataDisplay", true);
-        // visibleElement("button", false);
-        // visibleElement("selectCity", false);
+        visibleElement("dataDisplay", true);
+        visibleElement("button", false);
+        visibleElement("selectCity", false);
     };
-});
-
-
-
-onEvent("button", "click", function () {
-
-    var location = getValue("location");
-    // console.log(location);
 
     if (location == "no") {
-        fetchNewOrleansWeather();
+        // fetchWeather(here, -90.0751);
+        fetchWeather(29.9547, -90.0751);
         cityState = "New Orleans, LA";
     } else if (location == "ny") {
-        fetchNewYorkWeather();
+        fetchWeather(40.7143, -74.006);
         cityState = "New York, New York";
     } else if (location == "sw") {
-        fetchSeattleWeather();
+        fetchWeather(47.6062, -122.3321);
         cityState = "Seattle, Washington";
     }
 });
 
-
 let city;
 let cityState;
 
+/**
+ * Enable or disable element.
+ * @param {number} lat - The id of button.
+ * @param {number} long - disable or enable.
+ * 
+ * @example
+ * fetchWeather(29.9547, -90.0751);
+ */
 
-function fetchNewOrleansWeather() {
-    const requestOptions = { method: "GET", redirect: "follow" };
+function fetchWeather(lat, long) {
+        const requestOptions = { method: "GET", redirect: "follow" };
 
-    fetch("https://api.open-meteo.com/v1/forecast?latitude=29.9547&longitude=-90.0751&current=apparent_temperature&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch", requestOptions)
-        .then((response) => response.json())
-        .then(function (result) {
-            console.log(result);
-            city = result;
-            updateWeatherCard();
-        })
-        .catch((error) => console.error(error));
+        fetch("https://api.open-meteo.com/v1/forecast?latitude=" + lat + "&longitude=" + long + "&current=apparent_temperature&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch", requestOptions)
+            .then((response) => response.json())
+            .then(function (result) {
+                console.log(result);
+                city = result;
+                updateWeatherCard();
+            })
+            .catch((error) => console.error(error));
 }
 
-function fetchNewYorkWeather() {
-    const requestOptions = { method: "GET", redirect: "follow" };
-
-    fetch("https://api.open-meteo.com/v1/forecast?latitude=40.7143&longitude=-74.006&current=apparent_temperature&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch", requestOptions)
-        .then((response) => response.json())
-        .then(function (result) {
-            console.log(result);
-            city = result;
-            updateWeatherCard();
-        })
-        .catch((error) => console.error(error));
-}
-
-function fetchSeattleWeather() {
-    const requestOptions = { method: "GET", redirect: "follow" };
-
-    fetch("https://api.open-meteo.com/v1/forecast?latitude=47.6062&longitude=-122.3321&current=apparent_temperature&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch", requestOptions)
-        .then((response) => response.json())
-        .then(function (result) {
-            console.log(result);
-            city = result;
-            updateWeatherCard();
-        })
-        .catch((error) => console.error(error));
-}
-
-// this function will update the page with the current data
 function updateWeatherCard() {
     setText("cityState", cityState);
     setText("latitude", city.latitude);
     setText("longitude", city.longitude);
     setText("temp", city.current.apparent_temperature);
-}
-
-
-
-/**
- * Enable or disable element.
- * @param {string} id - The id of button.
- * @param {boolean} [status=false] - disable or enable.
- * 
- * @example
- * disableButton("ID", true);
- */
-function disableButton(elementId, status) {
-    const element = document.getElementById(elementId)
-    if (status == true) {
-        element.classList.add('disabled');
-    } else {
-        element.classList.remove('disabled');
-    }
 }
 
