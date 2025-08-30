@@ -27,31 +27,41 @@
 
     <div class="container myContainer d-flex justify-content-center">
         <div class="card mx-auto p-5 bg-primary" style="width: 28rem;">
+
             <h1 class="text-light text-nowrap">Check The Weather</h1>
+
             <div class="card-body">
+
                 <div id="dataDisplay">
                     <h3 id="cityState" class="card-title text-light">City, ST</h3>
                     <p class="card-text text-light">
                         Latitude: <span id="latitude"></span><br>
                         Longitude: <span id="longitude"></span><br>
                         Temperature: <span id="temp"></span><span>°F</span>
+                        <br><br>
+                        Temperature: <span id="temp2"></span><span>°F</span>
                     </p>
                 </div>
+
                 <select id="location" class="form-select myWidth mt-2" aria-label="Default select example">
                     <option id="selectCity" selected value="none">Select a city...</option>
                     <option value="no">New Orleans, Louisiana</option>
                     <option value="ny">New York, New York</option>
                     <option value="sw">Seattle, Washington</option>
                 </select>
-                <div class=" card-footer d-flex justify-content-center">
-                    <button id="button" class="btn bg-white text-primary mt-2 myWidth" type="button">Display
+
+                <!-- <div class=" card-footer d-flex justify-content-center border"> -->
+                    <button id="button" class="btn bg-white text-primary mt-2 myWidth" type="button" style="width: 100%;">Display
                         Weather</button>
-                </div>
+                <!-- </div> -->
+
             </div>
+
         </div>
     </div>
     <script src="js/helpers.js"></script>
     <script src="js/script.js"></script>
+    <!-- <script src="js/script-orig.js"></script> -->
 
 </body>
 

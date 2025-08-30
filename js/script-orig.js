@@ -1,7 +1,8 @@
+console.log("script-orig.org");
 // CODE FOR INDEX.HTML
 
 // I want to have the data here put in HTML elements
-var _noWeather = {
+var noWeather = {
     "latitude": 29.95653,
     "longitude": -90.07374,
     "generationtime_ms": 0.034809112548828125,
@@ -20,7 +21,8 @@ var _noWeather = {
         "apparent_temperature": 91.6
     }
 };
-var _nyWeather = {
+
+var nyWeather = {
     "latitude": 40.710335,
     "longitude": -73.99309,
     "generationtime_ms": 0.028133392333984375,
@@ -39,7 +41,8 @@ var _nyWeather = {
         "apparent_temperature": 64.6
     }
 };
-var _swWeather = {
+
+var swWeather = {
     "latitude": 47.595562,
     "longitude": -122.32443,
     "generationtime_ms": 0.03445148468017578,
@@ -60,6 +63,9 @@ var _swWeather = {
 };
 
 
+
+
+
 disableButton("button", true);
 // visibleElement("dataDisplay", false);
 // visibleElement("button", false);
@@ -76,76 +82,48 @@ onEvent("location", "change", function () {
     };
 });
 
-
-
 onEvent("button", "click", function () {
 
+
     var location = getValue("location");
-    // console.log(location);
+    var city;
+    var cityState;
+
+    console.log(location);
 
     if (location == "no") {
-        fetchNewOrleansWeather();
+        city = noWeather;
         cityState = "New Orleans, LA";
     } else if (location == "ny") {
-        fetchNewYorkWeather();
+        city = nyWeather;
         cityState = "New York, New York";
     } else if (location == "sw") {
-        fetchSeattleWeather();
+        city = swWeather;
         cityState = "Seattle, Washington";
     }
+
+    console.log(city);
+
+    var latitude = city.latitude;
+    var longitute = city.longitude;
+    var temp = city.current.apparent_temperature;
+
+    setText("cityState", cityState);
+    setText("latitude", latitude);
+    setText("longitude", longitute);
+    setText("temp", temp);
 });
 
 
-let city;
-let cityState;
 
 
-function fetchNewOrleansWeather() {
-    const requestOptions = { method: "GET", redirect: "follow" };
-
-    fetch("https://api.open-meteo.com/v1/forecast?latitude=29.9547&longitude=-90.0751&current=apparent_temperature&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch", requestOptions)
-        .then((response) => response.json())
-        .then(function (result) {
-            console.log(result);
-            city = result;
-            updateWeatherCard();
-        })
-        .catch((error) => console.error(error));
-}
-
-function fetchNewYorkWeather() {
-    const requestOptions = { method: "GET", redirect: "follow" };
-
-    fetch("https://api.open-meteo.com/v1/forecast?latitude=40.7143&longitude=-74.006&current=apparent_temperature&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch", requestOptions)
-        .then((response) => response.json())
-        .then(function (result) {
-            console.log(result);
-            city = result;
-            updateWeatherCard();
-        })
-        .catch((error) => console.error(error));
-}
-
-function fetchSeattleWeather() {
-    const requestOptions = { method: "GET", redirect: "follow" };
-
-    fetch("https://api.open-meteo.com/v1/forecast?latitude=47.6062&longitude=-122.3321&current=apparent_temperature&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch", requestOptions)
-        .then((response) => response.json())
-        .then(function (result) {
-            console.log(result);
-            city = result;
-            updateWeatherCard();
-        })
-        .catch((error) => console.error(error));
-}
 
 // this function will update the page with the current data
 function updateWeatherCard() {
-    setText("cityState", cityState);
-    setText("latitude", city.latitude);
-    setText("longitude", city.longitude);
-    setText("temp", city.current.apparent_temperature);
+    setText("temp2", noWeather.current.apparent_temperature);
 }
+
+
 
 
 
