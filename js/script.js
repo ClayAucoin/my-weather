@@ -1,6 +1,6 @@
 
-disableButton("button", true);
 visibleElement("dataDisplay", false);
+disableButton("button", true);
 visibleElement("button", false);
 
 onEvent("location", "change", function () {
@@ -29,8 +29,20 @@ onEvent("location", "change", function () {
     }
 });
 
+const $ = (id) => document.getElementById(id);
+
+let button = $("button").value;
+// $("displayID").textContent = fieldID;
+
+$("button").addEventListener("click", () => {
+    fetchWeather();
+});
+
+
 let city;
 let cityState;
+
+
 
 /**
  * Enable or disable element.
@@ -42,18 +54,18 @@ let cityState;
  */
 
 function fetchWeather(lat, long) {
-        const requestOptions = { method: "GET", redirect: "follow" };
+    const requestOptions = { method: "GET", redirect: "follow" };
 
-        fetch("https://api.open-meteo.com/v1/forecast?latitude=" + lat + 
-            "&longitude=" + long + "&current=apparent_temperature&wind_speed_unit"+ 
-            "=mph&temperature_unit=fahrenheit&precipitation_unit=inch", requestOptions)
-            .then((response) => response.json())
-            .then(function (result) {
-                console.log(result);
-                city = result;
-                updateWeatherCard();
-            })
-            .catch((error) => console.error(error));
+    fetch("https://api.open-meteo.com/v1/forecast?latitude=" + lat +
+        "&longitude=" + long + "&current=apparent_temperature&wind_speed_unit" +
+        "=mph&temperature_unit=fahrenheit&precipitation_unit=inch", requestOptions)
+        .then((response) => response.json())
+        .then(function (result) {
+            console.log(result);
+            // city = result;
+            // updateWeatherCard();
+        })
+        .catch((error) => console.error(error));
 }
 
 function updateWeatherCard() {
